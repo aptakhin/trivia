@@ -1,5 +1,22 @@
 #!/usr/bin/env python3
 
+
+class PlayerOnBoard:
+    def __init__(self, raw: int) -> PlayerOnBoard:
+        if raw < 0 or raw > 11:
+            raise ValueError("Position can't be less than 0 or more than 11, got %d" % raw)
+        self._raw: int = raw
+        self._category: str = Game.calc_player_on_board_position(raw)
+
+    @property
+    def raw(self) -> int:
+        return self._raw
+    
+    @property
+    def category(self) -> str:
+        return self._category
+
+
 class Game:
     def __init__(self):
         self.players = []
@@ -80,7 +97,8 @@ class Game:
         if self._current_category == 'Sports': print(self.sports_questions.pop(0))
         if self._current_category == 'Rock': print(self.rock_questions.pop(0))
 
-    def calc_player_on_board_position(self, place: int):
+    @staticmethod
+    def calc_player_on_board_position(place: int):
         if place == 0: return 'Pop'
         if place == 4: return 'Pop'
         if place == 8: return 'Pop'
