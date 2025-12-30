@@ -80,18 +80,21 @@ class Game:
         if self._current_category == 'Sports': print(self.sports_questions.pop(0))
         if self._current_category == 'Rock': print(self.rock_questions.pop(0))
 
+    def calc_player_on_board_position(self, place: int):
+        if place == 0: return 'Pop'
+        if place == 4: return 'Pop'
+        if place == 8: return 'Pop'
+        if place == 1: return 'Science'
+        if place == 5: return 'Science'
+        if place == 9: return 'Science'
+        if place == 2: return 'Sports'
+        if place == 6: return 'Sports'
+        if place == 10: return 'Sports'
+        return 'Rock'
+
     @property
     def _current_category(self):
-        if self.places[self.current_player] == 0: return 'Pop'
-        if self.places[self.current_player] == 4: return 'Pop'
-        if self.places[self.current_player] == 8: return 'Pop'
-        if self.places[self.current_player] == 1: return 'Science'
-        if self.places[self.current_player] == 5: return 'Science'
-        if self.places[self.current_player] == 9: return 'Science'
-        if self.places[self.current_player] == 2: return 'Sports'
-        if self.places[self.current_player] == 6: return 'Sports'
-        if self.places[self.current_player] == 10: return 'Sports'
-        return 'Rock'
+        return self.calc_player_on_board_position(self.places[self.current_player])
 
     def was_correctly_answered(self):
         if self.in_penalty_box[self.current_player]:
