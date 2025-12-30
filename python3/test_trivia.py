@@ -33,10 +33,7 @@ def test_win_on_correct_answer():
 
 
 def test_player_on_board():
-    game = Game()
-    game.add("Chet")
-
-    assert game.calc_category_from_place(0) == "Pop"
+    assert PlayerOnBoard.calc_category_from_place(0) == "Pop"
 
 
 def test_player_on_board_value():
