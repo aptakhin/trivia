@@ -6,7 +6,7 @@ class PlayerOnBoard:
         if raw < 0 or raw > 11:
             raise ValueError("Position can't be less than 0 or more than 11, got %d" % raw)
         self._raw: int = raw
-        self._category: str = Game.calc_player_on_board_position(raw)
+        self._category: str = Game.calc_category_from_place(raw)
 
     @property
     def raw(self) -> int:
@@ -100,7 +100,7 @@ class Game:
         if self._current_category == 'Rock': print(self.rock_questions.pop(0))
 
     @staticmethod
-    def calc_player_on_board_position(place: int):
+    def calc_category_from_place(place: int):
         if place == 0: return 'Pop'
         if place == 4: return 'Pop'
         if place == 8: return 'Pop'
@@ -114,7 +114,7 @@ class Game:
 
     @property
     def _current_category(self):
-        return self.calc_player_on_board_position(self.places[self.current_player])
+        return self.calc_category_from_place(self.places[self.current_player])
 
     def was_correctly_answered(self):
         if self.in_penalty_box[self.current_player]:

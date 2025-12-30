@@ -36,7 +36,7 @@ def test_player_on_board():
     game = Game()
     game.add("Chet")
 
-    assert game.calc_player_on_board_position(0) == "Pop"
+    assert game.calc_category_from_place(0) == "Pop"
 
 
 def test_player_on_board_value():
