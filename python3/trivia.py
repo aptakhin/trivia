@@ -20,7 +20,7 @@ class PlayerOnBoard:
 class Game:
     def __init__(self):
         self.players = []
-        self.places = [0] * 6
+        self.places = [PlayerOnBoard(0).raw] * 6
         self.purses = [0] * 6
         self.in_penalty_box = [0] * 6
 
@@ -46,7 +46,7 @@ class Game:
 
     def add(self, player_name):
         self.players.append(player_name)
-        self.places[self.how_many_players] = 0
+        self.places[self.how_many_players] = PlayerOnBoard(0).raw
         self.purses[self.how_many_players] = 0
         self.in_penalty_box[self.how_many_players] = False
 
@@ -68,9 +68,10 @@ class Game:
                 self.is_getting_out_of_penalty_box = True
 
                 print("%s is getting out of the penalty box" % self.players[self.current_player])
-                self.places[self.current_player] = self.places[self.current_player] + roll
-                if self.places[self.current_player] > 11:
-                    self.places[self.current_player] = self.places[self.current_player] - 12
+                set_place = self.places[self.current_player] + roll
+                if set_place > 11:
+                    set_place -= 12
+                self.places[self.current_player] = PlayerOnBoard(set_place).raw
 
                 print(self.players[self.current_player] + \
                             '\'s new location is ' + \
@@ -81,9 +82,10 @@ class Game:
                 print("%s is not getting out of the penalty box" % self.players[self.current_player])
                 self.is_getting_out_of_penalty_box = False
         else:
-            self.places[self.current_player] = self.places[self.current_player] + roll
-            if self.places[self.current_player] > 11:
-                self.places[self.current_player] = self.places[self.current_player] - 12
+            set_place = self.places[self.current_player] + roll
+            if set_place > 11:
+                set_place -= 12
+            self.places[self.current_player] = PlayerOnBoard(set_place).raw
 
             print(self.players[self.current_player] + \
                         '\'s new location is ' + \
